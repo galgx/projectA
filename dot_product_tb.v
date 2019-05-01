@@ -36,12 +36,13 @@ module inner_product_tb ();
 
 
 	// DUT
-	wire [(2*`DATA_WIDTH + `N_BIT) - 1  : 0] outp;
+	//wire [(2*`DATA_WIDTH + `N_BIT) - 1  : 0] outp;
+	wire [7:0] outp;
 	reg [0:63] num1, num2;
 
-
+phase1 iphase1(.x(num1),.teta(num2),.h(outp));
       // instantiate 
-      dot_product
+   /*   dot_product
           #(
                 .N(`NUM_ELEMS),
                 .DW(`DATA_WIDTH)
@@ -50,5 +51,8 @@ module inner_product_tb ();
                 .inp2(num2), // takes in count as 2 inputs 
                 .outp(outp)
           );
+*/
+
+
 
 endmodule

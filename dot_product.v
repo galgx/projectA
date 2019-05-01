@@ -1,8 +1,8 @@
 module dot_product
   #(parameter
-      N = 8,
+      N = 8,//the number of the numbers in a row
       N_bit = 3, //the number of bits for 8 100 is 3
-      DW = 8
+      DW = 8 //the number of buts for each number
   )
   (
       input wire[(DW * N) -1 : 0] inp1,

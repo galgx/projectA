@@ -7,6 +7,7 @@ import ctypes
 width = 8
 z_width = width
 i = 0;
+j =0;
 
 print("module sigmoid_LUT(z, h);")
 print("    input [{}:0] z;".format(z_width - 1))
@@ -18,16 +19,21 @@ print("        case (z)")
 
 x = []
 
-for z in range(2 ** z_width):
+for z in range(2 ** 8):
+
     i = i+ 1/(2**6)
+    j = j+1;
+ 
     h = 1 / (1 + math.exp(-i))
+
+    
     f1 = bin(int(h*256)).replace('0b','')
 	
     
    # f1 = bin(ctypes.c_uint.from_buffer(ctypes.c_float(h)).value)[2:]
     x.append(h)
     #print(z);
-    print("    %s'b%s: h = %s'b%s;  // %.4f" % (z_width, bin(z).replace('0b',''), z_width, f1, h));
+    print("    %s'b%s: h = %s'b%s;  // %.4f" % (8, bin(int(i*2**6)).replace('0b',''), z_width, f1, h));
     
     #print(f1)
     #print("%s'b")
