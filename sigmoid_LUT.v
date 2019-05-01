@@ -1,8 +1,16 @@
-module sigmoid_LUT(z, h);
+module sigmoid_LUT(clk,reset, enable,z, h);
+    input clk;
+    input reset;
+    input enable;
     input [7:0] z;
     output reg [7:0] h;
 
-    always @(z) begin
+    always @(clk) begin
+    if(reset == 1) begin
+         h = 0;
+         end
+      
+      else if (enable == 1) begin 
         case (z)
     8'b1: h = 8'b10000000;  // 0.5039
     8'b10: h = 8'b10000001;  // 0.5078
@@ -262,5 +270,6 @@ module sigmoid_LUT(z, h);
     8'b100000000: h = 8'b11111011;  // 0.9820
             default: h <= 0;
         endcase
+    end
     end
 endmodule

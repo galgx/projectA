@@ -40,7 +40,7 @@ module inner_product_tb ();
 	wire [7:0] outp;
 	reg [0:63] num1, num2;
 
-phase1 iphase1(.x(num1),.teta(num2),.h(outp));
+phase1 iphase1(.clk(clk), .reset(reset), .enable(enable),.x(num1),.teta(num2),.h(outp));
       // instantiate 
    /*   dot_product
           #(
