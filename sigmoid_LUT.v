@@ -1,12 +1,13 @@
-module sigmoid_LUT(clk,reset, enable,z, h);
+module sigmoid_LUT(clk,resetn, enable,z, h);
     input clk;
-    input reset;
+    input resetn;
     input enable;
     input [7:0] z;
     output reg [7:0] h;
 
-    always @(clk) begin
-    if(reset == 1) begin
+  always @ (posedge clk or  negedge resetn)
+  begin
+    if(!resetn) begin
          h = 0;
          end
       
