@@ -15,7 +15,7 @@ module phase2_tb();
    reg [63:0] x_col;
    reg [63:0] y;
    reg [63:0] h;
-   reg [63:0] g;
+   wire [63:0] g;
    parameter DW =8; 
    parameter N =8;
     parameter N_bit = 3;
@@ -24,7 +24,7 @@ module phase2_tb();
 
   
  
-   phase2 U_2( .clk(clock),.resetn(resetn),.enable(enable),.x_col(x),.y(y),.h(h), .g(g) );
+   phase2 U_2( .clk(clock),.resetn(resetn),.enable(enable),.x_col(x_col),.y(y),.h(h), .g(g) );
 
 
  // ----------------------------------------------------------------------

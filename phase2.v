@@ -22,7 +22,7 @@
 
 module phase2(clk,resetn,enable,x_col,h,y,g);
     parameter DW =8; 
-    parameter DW_hy = 9;
+ //   parameter DW_hy = 9;
     parameter N =8;
     parameter N_bit = 3;
     input clk;
@@ -31,14 +31,14 @@ module phase2(clk,resetn,enable,x_col,h,y,g);
     input [DW*N - 1:0] x_col;
     input [DW*N - 1:0] h;
     input [DW*N - 1:0] y;
-    output [(DW_hy + DW)*N - 1:0] g;
+    output wire [(DW + DW)*N - 1:0] g;
 
    // `include "dot_product.v";
     wire  [(2*DW)*N -1 : 0] dot_products;
     wire [DW*N -1 :0] reduction; 
     wire [(2*DW)+N_bit -1:0] inner_product;
-    wire [DW*N -1 :0] g;
-    MBGD_REDUCTION MBGD_REDUCTION(.clk(clk), .resetn(resetn),.enable(enable), .inp1(h), .inp2(y), .reduction(reduction));
+    
+    MBGD_H_Y_REDUCTION MBGD__H_Y_REDUCTION(.clk(clk), .resetn(resetn),.enable(enable), .inp1(h), .inp2(y), .reduction(reduction));
     MBGD_DOT_PROD_CALC MBGD_DOT_PROD_CALC(.clk(clk), .resetn(resetn),.enable(enable), .inp1(x_col), .inp2(reduction), .dot_products(dot_products));
     
     MBGD_ADD_CALC MBGD_ADD_CALC (.clk(clk), .resetn(resetn),.enable(enable),.dot_products(dot_products), .outp(inner_product));
