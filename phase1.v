@@ -32,7 +32,7 @@ module phase1(clk,resetn,enable,x,teta,h);
     parameter N_bit = 3;
    // `include "dot_product.v";
     wire  [(2*DW)*N -1 : 0] dot_products;
-    wire [2*DW -1:0] inner_product;
+    wire [2*DW + N_bit -1:0] inner_product;
     wire [DW -1:0] z;
     MBGD_DOT_PROD_CALC MBGD_DOT_PROD_CALC(.clk(clk), .resetn(resetn),.enable(enable), .inp1(x), .inp2(teta), .dot_products(dot_products));
     
