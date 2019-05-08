@@ -19,7 +19,7 @@ module MBGD_DOT_PROD_CALC
   begin
     if(!resetn) begin
     
-    dot_products = 152'b0;
+    dot_products = 0;
 
      end
       

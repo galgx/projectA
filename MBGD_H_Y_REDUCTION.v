@@ -18,7 +18,7 @@ module MBGD_H_Y_REDUCTION
   begin
     if(!resetn) begin
     
-    reduction = 64'b0;
+    reduction = 0;
 
      end
       

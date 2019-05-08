@@ -1,9 +1,10 @@
 module sigmoid_LUT(clk,resetn, enable,z, h);
+    parameter DW =8; 
     input clk;
     input resetn;
     input enable;
-    input [7:0] z;
-    output reg [7:0] h;
+    input [DW -1:0] z;
+    output reg [DW -1:0] h;
 
   always @ (posedge clk or  negedge resetn)
   begin

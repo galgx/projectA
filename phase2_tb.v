@@ -44,7 +44,7 @@ initiate_all;                                 // Initiates all input signals to 
 
  //  x = 64'b0000001000000100;      // CPU WRITE- first parameter is the address, second is the data 
    //teta = 64'b0000001000000100;
-   x_col = 64'b00011100;
+   x_col = 64'b10011100;
    h = 64'b01011110;
    y = 64'b01000100;
    //#100

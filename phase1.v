@@ -21,15 +21,16 @@
 
 
 module phase1(clk,resetn,enable,x,teta,h);
-    input clk;
-    input resetn;
-    input enable;
-    input [63:0] x;
-    input [63:0] teta;
-    output [7:0] h;
     parameter DW =8; 
     parameter N =8;
     parameter N_bit = 3;
+    input clk;
+    input resetn;
+    input enable;
+    input [DW*N - 1:0] x;
+    input [DW*N - 1:0] teta;
+    output [DW -1:0] h;
+
    // `include "dot_product.v";
     wire  [(2*DW)*N -1 : 0] dot_products;
     wire [2*DW + N_bit -1:0] inner_product;
