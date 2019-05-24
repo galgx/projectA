@@ -1,37 +1,40 @@
+`timescale 1ns/1ps
 module MBGD_DOT_PROD_CALC
   #(parameter
-      N = 8,//the number of the numbers in a row
+      N = 8,//the number of the numbers in a roDW
       N_bit = 3, //the number of bits for 8 100 is 3
-      DW = 8 //the number of buts for each number
+      DW1 = 8,//the Data Width of each number in bits for the inp1
+      DW2 = 8 //the Data Width of each number in bits for inp2
   )
   (
       input clk,
       input resetn,
       input enable,
-      input wire[(DW * N) -1 : 0] inp1,
-      input wire[(DW * N) -1 : 0] inp2,
-      output reg [(2*DW)*N -1: 0]dot_products  // intermediate product sums ,128 bits
+      input wire[(DW1 * N) -1 : 0] inp1,
+      input wire[(DW2 * N) -1 : 0] inp2,
+      output reg [(DW1+DW2)*N -1: 0]dot_products  // intermediate product sums ,128 bits
   );
 
   
-  //assign sums[0] = (inp1[DW - 1 : 0] * inp2[DW - 1 : 0]);
+  //assign sums[0] = (inp1[DDW - 1 : 0] * inp2[DDW - 1 : 0]);
   always @ (posedge clk or  negedge resetn)
   begin
     if(!resetn) begin
     
-    dot_products = 0;
+    dot_products <= 0;
 
      end
       
       else if (enable == 1) begin 
-        dot_products[(2*DW)*(1)- 1 :0]  = (inp1[DW - 1 : 0] * inp2[DW - 1 : 0]);;
-        dot_products[(2*DW)*(N-6)-1:(2*DW)] = inp1[ (1 + 1) * DW - 1 : 1 * DW ] * inp2[ (1 + 1) * DW - 1 : 1 * DW ];
-        dot_products[(2*DW)*(N-5)-1:(2*DW)*(N-6)] = inp1[ (2 + 1) * DW - 1 : 2 * DW ] * inp2[ (2 + 1) * DW - 1 : 2 * DW ];
-        dot_products[(2*DW)*(N-4)-1:(2*DW)*(N-5)] = inp1[ (3 + 1) * DW - 1 : 3 * DW ] * inp2[ (3 + 1) * DW - 1 : 3 * DW ];
-        dot_products[(2*DW)*(N-3)-1:(2*DW)*(N-4)] = inp1[ (4 + 1) * DW - 1 : 4 * DW ] * inp2[ (4 + 1) * DW - 1 : 4 * DW ];
-        dot_products[(2*DW)*(N-2)-1:(2*DW)*(N-3)] = inp1[ (5 + 1) * DW - 1 : 5 * DW ] * inp2[ (5 + 1) * DW - 1 : 5 * DW ];
-        dot_products[(2*DW)*(N-1)-1:(2*DW)*(N-2)] = inp1[ (6 + 1) * DW - 1 : 6 * DW ] * inp2[ (6 + 1) * DW - 1 : 6 * DW ];
-        dot_products[(2*DW)*(N-0)-1:(2*DW)*(N-1)] = inp1[ (7 + 1) * DW - 1 : 7 * DW ] * inp2[ (7 + 1) * DW - 1 : 7 * DW ];
+        #12      
+        dot_products[(DW1+DW2)*(1)- 1 :0]  <=  (inp1[DW1 - 1 : 0] * inp2[DW2 - 1 : 0]);;
+        dot_products[(DW1+DW2)*(N-6)-1:(DW1+DW2)] <=  inp1[ (1 + 1) * DW1 - 1 : 1 * DW1 ] * inp2[ (1 + 1) * DW2 - 1 : 1 * DW2 ];
+        dot_products[(DW1+DW2)*(N-5)-1:(DW1+DW2)*(N-6)] <=  inp1[ (2 + 1) * DW1 - 1 : 2 * DW1 ] * inp2[ (2 + 1) * DW2 - 1 : 2 * DW2 ];
+        dot_products[(DW1+DW2)*(N-4)-1:(DW1+DW2)*(N-5)] <=  inp1[ (3 + 1) * DW1 - 1 : 3 * DW1 ] * inp2[ (3 + 1) * DW2 - 1 : 3 * DW2 ];
+        dot_products[(DW1+DW2)*(N-3)-1:(DW1+DW2)*(N-4)] <=  inp1[ (4 + 1) * DW1 - 1 : 4 * DW1 ] * inp2[ (4 + 1) * DW2 - 1 : 4 * DW2 ];
+        dot_products[(DW1+DW2)*(N-2)-1:(DW1+DW2)*(N-3)] <=  inp1[ (5 + 1) * DW1 - 1 : 5 * DW1 ] * inp2[ (5 + 1) * DW2 - 1 : 5 * DW2 ];
+        dot_products[(DW1+DW2)*(N-1)-1:(DW1+DW2)*(N-2)] <=  inp1[ (6 + 1) * DW1 - 1 : 6 * DW1 ] * inp2[ (6 + 1) * DW2 - 1 : 6 * DW2 ];
+        dot_products[(DW1+DW2)*(N-0)-1:(DW1+DW2)*(N-1)] <=  inp1[ (7 + 1) * DW1 - 1 : 7 * DW1 ] * inp2[ (7 + 1) * DW2 - 1 : 7 * DW2 ];
      end
    end
 

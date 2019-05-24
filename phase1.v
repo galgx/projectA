@@ -41,7 +41,7 @@ module phase1(clk,resetn,enable,x,teta,h);
 
     assign z = inner_product[2*DW + N_bit -1:(DW + N_bit)];  //take the 8 MSB 
   
-    sigmoid_LUT isigmoid_LUT (.clk(clk), .resetn(resetn),.enable(enable), .z(z), .h(h));
+    MBGD_SIGMOID_CALC iMBGD_SIGMOID_CALC (.clk(clk), .resetn(resetn),.enable(enable), .z(z), .h(h));
   
     
 endmodule
