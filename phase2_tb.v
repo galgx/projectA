@@ -1,5 +1,6 @@
+`timescale 1ns / 1ps
 module phase2_tb();
- 
+
 // -----------------------------------------------------------       
 //                  Reset & Clock
 // -----------------------------------------------------------  
@@ -16,6 +17,9 @@ module phase2_tb();
    reg [63:0] y;
    reg [63:0] h;
    wire [7:0] g;
+   reg [7:0] teta_i_t;
+   reg [7:0] epsilon;
+   wire [7:0] teta;
    parameter DW =8; 
    parameter N =8;
     parameter N_bit = 3;
@@ -24,7 +28,7 @@ module phase2_tb();
 
   
  
-   phase2 U_2( .clk(clock),.resetn(resetn),.enable(enable),.x_col(x_col),.y(y),.h(h), .g(g) );
+   phase2 U_2( .clk(clock),.resetn(resetn),.enable(enable),.epsilon(epsilon), .x_col(x_col),.y(y),.h(h), .teta_i_t(teta_i_t),.teta(teta) );
 
 
  // ----------------------------------------------------------------------
@@ -35,7 +39,7 @@ module phase2_tb();
 initial begin
 
 initiate_all;                                 // Initiates all input signals to '0' and open necessary files
-	 
+	epsilon = 8'b10; 
    #100 
    resetn <= 1;
    @(posedge clock)
@@ -43,7 +47,7 @@ initiate_all;                                 // Initiates all input signals to 
    #100
 
  //  x = 64'b0000001000000100;      // CPU WRITE- first parameter is the address, second is the data 
-   //teta = 64'b0000001000000100;
+   teta_i_t = 8'b11000100;
    x_col <= 64'b10011100;
    h <= 64'b01011110;
    y <= 64'b01000100;
@@ -116,8 +120,8 @@ end
 	 h = 64'b0;
 	 y = 64'b0;
 	// cpu_apb_rdata  = 8'b0;
-
-	  
+    teta_i_t = 0;
+	 epsilon = 64'b0; 
      #10 resetn = 1'b0;     // Disable Reset signal.	 
 	 
         //TO DO: ask if we need to write the configuration file and what exactly it has
